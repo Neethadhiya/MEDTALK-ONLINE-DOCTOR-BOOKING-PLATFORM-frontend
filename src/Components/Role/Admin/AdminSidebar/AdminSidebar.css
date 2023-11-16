@@ -1,0 +1,33 @@
+/* Default styles for large screens */
+.app {
+    display: flex;
+    height: 100vh;
+    margin-top: 80px;
+  }
+  
+  .sidebar {
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+    background-color:white; /* Sidebar background color */
+    color: '#1e1919'; /* Sidebar text color */
+    transition: all 0.3s; /* Smooth transition for sidebar animation */
+  }
+  
+  .sidebar-collapsed {
+    flex: 0 0 60px; /* Smaller width when collapsed */
+  }
+  
+  /* Media query for small screens (adjust max-width as needed) */
+  @media (max-width: 768px) {
+    .app {
+      flex-direction: column; /* Stack items vertically on small screens */
+    }
+  
+    .sidebar {
+      flex: 0 0 60px; /* Collapse the sidebar */
+    }
+  
+    .sidebar-collapsed {
+      flex: 0 0 60px; /* Keep the same width when collapsed */
+    }
+  }
+  

@@ -1,0 +1,29 @@
+/* YourComponent.css */
+
+/* Container for the image and data */
+.responsive-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Image style */
+  .left-image {
+    width: 200px; /* Adjust the width to make the image larger */
+    height: 200px; /* Adjust the height to make the image larger */
+    object-fit: cover; /* Preserve aspect ratio and cover the entire container */
+    border-radius: 50%; /* Make the image round */
+  }
+  
+  /* Media query for medium and larger screens */
+  @media (min-width: 768px) {
+    .responsive-container {
+      flex-direction: row; /* Keep the image on the left for medium and larger screens */
+    }
+  
+    .left-image {
+      margin-right: 20px; /* Add margin between the image and the form */
+    }
+  }
+  

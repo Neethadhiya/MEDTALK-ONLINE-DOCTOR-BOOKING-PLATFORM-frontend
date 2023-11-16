@@ -1,0 +1,80 @@
+.App {
+    font-family: sans-serif;
+    position: relative;
+    width: 80vw;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    color:  #0d9eb5;
+  }
+  .heading {
+    color:  #0d9eb5;
+    border-bottom: 1px solid  #0d9eb5;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+  }
+  input {
+    width: 40%;
+    min-width: 200px;
+    border-radius: 10px;
+    border: 2px solid  #0d9eb5;
+    padding: 10px;
+    font-size: 14px;
+  }
+  button {
+    height: 40px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 15px;
+    display: inline-block;
+    text-align: center;
+    user-select: none;
+    font-weight: 600;
+    border-radius: 4px;
+    color: #ffffff;
+    border: 1px solid  #0d9eb5;
+    background-color:  #0d9eb5;
+    cursor: pointer;
+    margin: 0px 15px;
+    min-width: 100px;
+  }
+  
+  button:hover {
+    background:  #0d9eb5;
+    color: #ffffff;
+  }
+  
+  table {
+    width: 100%;
+    padding: 1em;
+    margin: 20px 0;
+    border-collapse: collapse;
+    box-shadow: 0 1px 2px 0 #c6e8c9;
+  }
+  
+  thead {
+    background-color: #0d9eb5;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+  th {
+    text-align: left;
+    padding: 8px;
+    background-color: 1px solid #ffffff;
+    color:  #0d9eb5;
+  }
+  td {
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  tr {
+    height: 50px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e0e0e0;
+  }
+  

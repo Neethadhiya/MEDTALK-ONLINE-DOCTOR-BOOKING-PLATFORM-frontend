@@ -1,0 +1,163 @@
+/* Loader.css */
+
+.full-screen-loader {
+    height: 94vh; /* Reduce the height */
+    width: 98vw; /* Reduce the width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f2f2f2; */
+    overflow: hidden;
+  }
+  
+  .ball-loader {
+    width: 40px;
+    height: 40px;
+    position: relative;
+  }
+  
+  .ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    animation-duration: 4s; /* Slow down the animation */
+    animation-iteration-count: infinite;
+    opacity: 0.7;
+  }
+  
+  .blue {
+    background-color: #007bff; /* Blue */
+    animation-name: moveBallBlue;
+  }
+  
+  .red {
+    background-color: #e15b64; /* Red */
+    animation-name: moveBallRed;
+  }
+  
+  .green {
+    background-color: #0e1611; /* Green */
+    animation-name: moveBallGreen;
+  }
+  
+  .violet {
+    background-color: #8ec214; /* Green */
+    animation-name: moveBallViolet;
+  }
+  .yello {
+    background-color: #d21c1c; /* Green */
+    animation-name: moveBallyello;
+  }
+  .maroon {
+    background-color: #ddc913; /* Green */
+    animation-name: moveBallmaroon;
+  }
+  .pink {
+    background-color: #370e8e; /* Green */
+    animation-name: moveBallpink;
+  }
+  .magenda {
+    background-color: #c91b78; /* Green */
+    animation-name: moveBallmagenda;
+  }
+ /* Loader.css */
+
+/* Ball Yello */
+@keyframes moveBallyello {
+    0% {
+      left: -90px;
+      top: 0;
+    }
+    100% {
+      left: 60vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Maroon */
+  @keyframes moveBallmaroon {
+    0% {
+      left: -10px;
+      top: 0;
+    }
+    100% {
+      left: 80vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Pink */
+  @keyframes moveBallpink {
+    0% {
+      right: -90px;
+      top: 0;
+    }
+    100% {
+      left: 60vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Magenta */
+  @keyframes moveBallmagenda {
+    0% {
+      right: 80px;
+      top: 0;
+    }
+    100% {
+      left: 10vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Violet */
+  @keyframes moveBallViolet {
+    0% {
+      right: -60px;
+      top: 0;
+    }
+    100% {
+      left: 90vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Blue */
+  @keyframes moveBallBlue {
+    0% {
+      left: 0;
+      top: -40px;
+    }
+    100% {
+      left: 60vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Red */
+  @keyframes moveBallRed {
+    0% {
+      left: 0;
+      top: 40vh;
+    }
+    100% {
+      left: 60vw;
+      top: 60vh;
+    }
+  }
+  
+  /* Ball Green */
+  @keyframes moveBallGreen {
+    0% {
+      left: 0;
+      top: 100vh;
+    }
+    100% {
+      left: 60vw;
+      top: 60vh;
+    }
+  }
+  
+  
+  

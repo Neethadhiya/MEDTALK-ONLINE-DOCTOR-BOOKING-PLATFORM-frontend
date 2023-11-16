@@ -1,0 +1,26 @@
+/* AdminAddSpecialityPage.css */
+
+.admin-page-container {
+  display: flex;
+}
+
+.admin-sidebar {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.add-speciality-container {
+  flex: 2;
+}
+
+/* Media query for extra-small (xs) screens */
+@media (max-width: 600px) {
+  .admin-page-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-sidebar {
+    margin-right: 0; /* Remove margin to stack sidebar and content */
+  }
+}

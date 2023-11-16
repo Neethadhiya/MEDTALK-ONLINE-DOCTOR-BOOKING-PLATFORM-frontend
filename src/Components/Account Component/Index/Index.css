@@ -1,0 +1,28 @@
+.img1{
+    position: absolute;
+    top: 0;
+    right: 65px;
+    animation: spin 3000ms linear infinite;
+}
+.zoom-image-container {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .zoom-image {
+    transition: transform 0.6s; /* Adjust the duration as needed */
+  }
+  
+  .zoom-image-container:hover .zoom-image {
+    transform: scale(1.5); /* Adjust the scale factor for zoom effect */
+  }
+  /* styles.css or your CSS file */
+.hover-card {
+  transition: 0.9s;
+}
+
+.hover-card:hover {
+  opacity: 0.8;
+  background-color: lightblue;
+  /* Add other hover styles as needed */
+}
