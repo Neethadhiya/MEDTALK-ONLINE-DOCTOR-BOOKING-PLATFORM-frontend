@@ -42,6 +42,7 @@ function ViewPrescription({id}) {
       })
       .catch((error) => {
         console.log(error);
+        console.log('dddd')
       });
   };
   useEffect(() => {
