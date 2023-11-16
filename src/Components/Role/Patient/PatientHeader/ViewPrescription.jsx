@@ -59,7 +59,7 @@ function ViewPrescription({id}) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop:'20px'
+            marginTop:'90px'
           }}
         >
           <Avatar sx={{ bgcolor: "#0d9eb5" }}>
@@ -69,7 +69,7 @@ function ViewPrescription({id}) {
 
           {prescription ? (
             <Card
-              sx={{ maxWidth: 645, color: "gray", border: "solid #0d9eb5" }}
+              sx={{ minWidth: 645, color: "gray", border: "solid #0d9eb5" }}
             >
               <CardContent>
                 <Grid
