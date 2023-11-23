@@ -8,11 +8,25 @@ import { baseUrl } from "../../../utils/constants";
 import CustomButton from "../../Helpers/CustomButton";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
+import { toast } from "react-toastify";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function PatientAppointmentDetails() {
   const { patientInfo } = useSelector((state) => state.auth);
   const [appointments, setAppointment] = useState("");
   const [openPrescription, setOpenPrescription] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [appointmentId, setAppointmentId] = useState("")
+ 
   const viewPrescription = () => {
     setOpenPrescription(true);
   };
@@ -22,6 +36,7 @@ function PatientAppointmentDetails() {
       .get(`view_patient_appointment_details/`)
       .then((response) => {
         setAppointment(response.data.appointments);
+        
       })
       .catch((error) => {
         console.log(error);
@@ -30,11 +45,73 @@ function PatientAppointmentDetails() {
   useEffect(() => {
     fetchData();
   }, [patient_id]);
-  const handleCancel = (id) => {
+  const handleCancelOpen = (id,date,time) => {
+    
+    setAppointmentId(id);
+    setOpen(true);
+   
   };
-  
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const confirmCancel = () => {
+    handleClose();
+    
+      const payload = {
+        id: appointmentId,
+      };
+   
+   
+    patientAxiosInstance
+      .delete("user_cancel_appointment/", { data: payload })
+      .then((response) => {
+        toast.success(response.data.message);
+             
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        console.error("Error on canceling the appointment:", error);
+      });
+  };
+
   return (
     <Grid container spacing={2}>
+       <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Appointment Confirmation"}</DialogTitle>
+        <DialogContent>
+       
+            <div>
+              <DialogContentText id="alert-dialog-slide-description">
+                Are you sure you want to confirm your appointment.
+              </DialogContentText>
+              <img
+                src="data:image/svg+xml;charset=utf-8,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130.2 130.2'%3E%3Ccircle class='path circle' fill='none' stroke='%2373AF55' stroke-width='6' stroke-miterlimit='10' cx='65.1' cy='65.1' r='62.1'/%3E%3Cpolyline class='path check' fill='none' stroke='%2373AF55' stroke-width='6' stroke-linecap='round' stroke-miterlimit='10' points='100.2,40.2 51.5,88.8 29.8,67.5 '/%3E%3C/svg%3E"
+                alt="Checkmark"
+                style={{
+                  width: "80px",
+                  display: "block",
+                  margin: "40px auto 0",
+                }}
+              />
+            </div>
+         
+        </DialogContent>
+        <DialogActions>
+          <CustomButton onClick={confirmCancel} style={{ width: "200px" }}>
+            Confirm
+          </CustomButton>
+          <CustomButton onClick={handleClose} style={{ width: "200px" }}>
+            Cancel
+          </CustomButton>
+        </DialogActions>
+      </Dialog>
       <h2 style={{ color: "#0d9eb5", display: "flex", alignItems: "center" }}>
         Appointment Details
         <img
@@ -207,6 +284,8 @@ function PatientAppointmentDetails() {
                       </div>
                     )}
 
+          
+
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div
                         style={{
@@ -239,8 +318,11 @@ function PatientAppointmentDetails() {
                         </Typography>
                       </div>
                       <div>
-                        <Typography component="div" sx={{ fontSize: "14px" }}>
-                          {appointment.status}
+                      
+                        <Typography component="div" 
+                        sx={{ fontSize: "14px" ,
+                        color: appointment.status === 'Canceled' ? 'red' : 'inherit', }}>
+                          <strong>{appointment.status}</strong>
                         </Typography>
                       </div>
                     </div>
@@ -313,7 +395,8 @@ function PatientAppointmentDetails() {
                         {appointment.payment_status ? (
                           <Typography
                             component="div"
-                            sx={{ fontSize: "14px", color: "green" }}
+                            sx={{ fontSize: "14px", 
+                            color:  "green" }}
                           >
                             <strong>Completed</strong>
                           </Typography>
@@ -322,19 +405,35 @@ function PatientAppointmentDetails() {
                             component="div"
                             sx={{ fontSize: "14px", color: "red" }}
                           >
-                            <strong>Pending</strong>
+                            {appointment.status === 'Canceled' ? 
+                            <strong>Payment added to wallet</strong>:
+                            <strong>Pending</strong>}
                           </Typography>
                         )}
                       </div>
+                      
                     </div>
                   </div>
                 </div>
                
+                {appointment.status === 'Canceled'? 
+                 <div style={{width:'220px'}}>
+                 <CustomButton sx={{color:'white',backgroundColor:'red'}} onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
+                   Canceled
+                 </CustomButton>
+                 </div> :<>
+                <div style={{width:'220px'}}>
+                
+                  <CustomButton onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
+                    Cancel Appointment
+                  </CustomButton>
+                  </div>
                 <Link to={`/patient/view_prescription/${appointment.id}`}>
                   <CustomButton onClick={viewPrescription}>
                     View Prescription
                   </CustomButton>
-                </Link>
+                </Link></>
+                }
               </CardContent>
             </Card>
           </Grid>

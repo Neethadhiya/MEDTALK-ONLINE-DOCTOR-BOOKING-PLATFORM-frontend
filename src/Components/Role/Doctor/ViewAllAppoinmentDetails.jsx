@@ -203,7 +203,10 @@ const isToday =
                           <strong>Completed</strong></Typography>
                       ) : (
                         <Typography variant="body1" sx={{color:'red'}} >
-                          <strong>Pending</strong></Typography>
+                          {appointmentData.status === 'Canceled' ? 
+                            <strong>Payment added to wallet</strong>:
+                            <strong>Pending</strong>}
+                            </Typography>
                       )}
                     </Grid>
 
@@ -276,8 +279,10 @@ const isToday =
                       </Typography>
                     </Grid>
                     <Grid item xs={6} md={6}>
-                      <Typography variant="body1">
-                        {appointmentData.status}
+                      <Typography variant="body1" 
+                       sx={{ 
+                       color: appointmentData.status === 'Canceled' ? 'red' : 'inherit', }}>
+                        <strong>{appointmentData.status}</strong>
                       </Typography>
                     </Grid>
                     <Grid item xs={6} md={6}>

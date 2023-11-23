@@ -202,7 +202,7 @@ function AdminDoctorDetails({ doctorId }) {
             <h2 style={{ color: "#0d9eb5" }}> Doctor Details</h2>
 
             {doctor ? (
-              <Card sx={{ maxWidth: 645, color: "gray" }}>
+              <Card sx={{ minWidth: 645, color: "gray" }}>
                 <CardMedia
                   sx={{
                     width: "200px",
@@ -211,7 +211,7 @@ function AdminDoctorDetails({ doctorId }) {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    marginLeft: { md: "105px", xs: "72px" },
+                    marginLeft: { md: "225px", xs: "72px" },
                     marginTop: "-16px",
                     marginBottom: "-30px",
                   }}
@@ -231,7 +231,8 @@ function AdminDoctorDetails({ doctorId }) {
                   <Grid
                     container
                     spacing={2}
-                    sx={{ marginLeft: { md: "35px", xs: "10px" } }}
+                    sx={{ marginLeft: { md: "65px", xs: "10px" },
+                     }}
                   >
                     <Grid item xs={6} md={6}>
                       <Typography variant="subtitle1" sx={{ color: "black" }}>
@@ -325,7 +326,7 @@ function AdminDoctorDetails({ doctorId }) {
                       item
                       xs={12}
                       md={12}
-                      sx={{ marginLeft: "105px", color: "black" }}
+                      sx={{ marginLeft: "165px", color: "black" }}
                     >
                       <Typography variant="subtitle1" sx={{ color: "black" }}>
                         <strong>Certificates</strong>

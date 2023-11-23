@@ -69,7 +69,7 @@ function CheckAvailabilty({ doctorId }) {
       date.getFullYear() === today.getFullYear()
     );
   }
-
+console.log(times,'9999999999999999999999999999999')
   const fetchData = async () => {
     try {
       const response = await patientAxiosInstance.post(
@@ -113,12 +113,39 @@ function CheckAvailabilty({ doctorId }) {
       .post("get_timeslots/", { date: date })
       .then((response) => {
         const fetchedTimes = response.data.timeslots[0].times;
-        setTimes(fetchedTimes);
+        const sortedTimes = sortTimes(fetchedTimes);
+        setTimes(sortedTimes);
       })
       .catch((error) => {
         console.error("Error fetching time slots:", error);
       });
   };
+
+  const sortTimes = (times) => {
+    return times.sort((a, b) => {
+      const timeA = getTimeValue(a.time);
+      const timeB = getTimeValue(b.time);
+  
+      return timeA - timeB;
+    });
+  };
+  
+  const getTimeValue = (timeString) => {
+    const [time, meridiem] = timeString.split(' ');
+    const [hours, minutes] = time.split(':');
+  
+    let hoursValue = parseInt(hours);
+    if (meridiem === 'pm' && hoursValue !== 12) {
+      hoursValue += 12;
+    } else if (meridiem === 'am' && hoursValue === 12) {
+      hoursValue = 0;
+    }
+  
+    return hoursValue * 60 + parseInt(minutes);
+  };
+
+
+
   const handleTimeClick = (timeId) => {
     // setIsTimeSelected(true);
     setSelectedTime(timeId);
@@ -166,6 +193,8 @@ function CheckAvailabilty({ doctorId }) {
       consultation_value: "Video",
     };
     const time_id = selectedTime;
+    const now = new Date(); // Get current time
+const oneHourAhead = new Date(now.getTime() + 60 * 60 * 1000);
     patientAxiosInstance
       .post("book_appointment/", payload)
       .then((response) => {
