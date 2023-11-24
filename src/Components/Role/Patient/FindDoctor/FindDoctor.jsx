@@ -225,7 +225,7 @@ function FindDoctor() {
                 {doctorsList.length === 0 ? (
                   
                   <img src='https://res.cloudinary.com/da4bmqkkz/image/upload/v1699966047/AdobeStock_98244593_Preview_m4q1pn.jpg' 
-                  width='80%px' height='70%'/>
+                  width='50%px' height='50%'/>
                 ) : (
                   <Typography variant="body2" color="textSecondary">
                     Loading
