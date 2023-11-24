@@ -223,9 +223,9 @@ function FindDoctor() {
             ) : (
               <Grid item xs={12}>
                 {doctorsList.length === 0 ? (
-                  <Typography variant="body2" color="textSecondary">
-                    No search results found
-                  </Typography>
+                  
+                  <img src='https://res.cloudinary.com/da4bmqkkz/image/upload/v1699966047/AdobeStock_98244593_Preview_m4q1pn.jpg' 
+                  width='80%px' height='70%'/>
                 ) : (
                   <Typography variant="body2" color="textSecondary">
                     Loading
