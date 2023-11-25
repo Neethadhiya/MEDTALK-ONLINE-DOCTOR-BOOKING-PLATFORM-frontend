@@ -93,7 +93,8 @@ function Wallet() {
             </CardContent>
           </Card>
         ) : (
-          <p>Loading your details</p>
+          <img src='https://res.cloudinary.com/da4bmqkkz/image/upload/v1699966047/AdobeStock_98244593_Preview_m4q1pn.jpg' 
+          width='50%px' height='50%'/>
         )}
       </Box>
     </Container>

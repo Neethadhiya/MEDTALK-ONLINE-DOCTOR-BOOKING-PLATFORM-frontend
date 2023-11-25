@@ -26,7 +26,9 @@ function PatientAppointmentDetails() {
   const [openPrescription, setOpenPrescription] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [appointmentId, setAppointmentId] = useState("")
- 
+  
+  const [cancel, setCancel] = useState(false)
+
   const viewPrescription = () => {
     setOpenPrescription(true);
   };
@@ -67,6 +69,7 @@ function PatientAppointmentDetails() {
       .delete("user_cancel_appointment/", { data: payload })
       .then((response) => {
         toast.success(response.data.message);
+        setCancel(true)
              
       })
       .catch((error) => {
@@ -320,8 +323,10 @@ function PatientAppointmentDetails() {
                       <div>
                       
                         <Typography component="div" 
-                        sx={{ fontSize: "14px" ,
-                        color: appointment.status === 'Canceled' ? 'red' : 'inherit', }}>
+                         sx={{
+                          fontSize: "14px",
+                          color: appointment.status === 'Canceled' ? 'red' : (appointment.status === 'Completed' ? 'green' : 'inherit'),
+                        }}>
                           <strong>{appointment.status}</strong>
                         </Typography>
                       </div>
@@ -411,29 +416,27 @@ function PatientAppointmentDetails() {
                           </Typography>
                         )}
                       </div>
-                      
                     </div>
                   </div>
                 </div>
                
-                {appointment.status === 'Canceled'? 
-                 <div style={{width:'220px'}}>
-                 <CustomButton sx={{color:'white',backgroundColor:'red'}} onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
-                   Canceled
-                 </CustomButton>
-                 </div> :<>
-                <div style={{width:'220px'}}>
-                
-                  <CustomButton onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
-                    Cancel Appointment
-                  </CustomButton>
+                <div style={{ width: '220px' }}>
+                    {appointment.status === 'Canceled' ? (
+                      <CustomButton sx={{ color: 'white', backgroundColor: 'red' }} onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
+                        Canceled
+                      </CustomButton>
+                    ) : appointment.status === 'Completed' ? (
+                      <Link to={`/patient/view_prescription/${appointment.id}`}>
+                        <CustomButton onClick={viewPrescription}>
+                          View Prescription
+                        </CustomButton>
+                      </Link>
+                    ) : (
+                      <CustomButton onClick={() => handleCancelOpen(appointment.id, appointment.selected_date, appointment.time)}>
+                        Cancel Appointment
+                      </CustomButton>
+                    )}
                   </div>
-                <Link to={`/patient/view_prescription/${appointment.id}`}>
-                  <CustomButton onClick={viewPrescription}>
-                    View Prescription
-                  </CustomButton>
-                </Link></>
-                }
               </CardContent>
             </Card>
           </Grid>

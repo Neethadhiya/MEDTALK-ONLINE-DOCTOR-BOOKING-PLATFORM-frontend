@@ -254,7 +254,7 @@ function ViewAppoinmentDetails({ id }) {
                     </Grid>
                     {appointmentData.status == "New Appointment" &&
                     appointmentData.payment_status ? (
-                      <>
+                      
                         <Grid item xs={6} md={6}>
                           <CustomButton
                             style={{ width: "200px" }}
@@ -263,6 +263,7 @@ function ViewAppoinmentDetails({ id }) {
                             Start Meeting
                           </CustomButton>
                         </Grid>
+                        ) : null}
                         <Grid item xs={6} md={6}>
                           <CustomButton
                             style={{ width: "200px" }}
@@ -276,8 +277,8 @@ function ViewAppoinmentDetails({ id }) {
                         <Grid item xs={12} md={12}>
         
                         </Grid>
-                      </>
-                    ) : null}
+                     
+                   
                   </Grid>
                 </CardContent>
               </Card>
