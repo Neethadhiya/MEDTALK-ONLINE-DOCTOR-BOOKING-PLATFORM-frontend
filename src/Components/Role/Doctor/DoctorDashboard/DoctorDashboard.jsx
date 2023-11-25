@@ -15,10 +15,16 @@ import { baseUrl } from "../../../../utils/constants";
 import DoctorSidebar from "../DoctorSidebar/DoctorSidebar";
 import Container from "@mui/material/Container";
 import { BarChart } from "@mui/x-charts/BarChart";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
 function DoctorDashboard() {
   const [months, setMonthsData] = useState([]);
   const [income, setIncomeData] = useState([]);
+  const [appointmentCount, setAppointmentCount] = useState('');
+  const [totalDoctorFees, setTotalDoctorFees] = useState('');
+
   const fetchData = () => {
     doctorAxiosInstance
       .get(`get_doctor_chart/`)
@@ -27,6 +33,9 @@ function DoctorDashboard() {
         if (response.data) {
           setMonthsData(response.data.months || []);
           setIncomeData(response.data.doctor_fees || []);
+          setAppointmentCount(response.data.appointment_count)
+          setTotalDoctorFees(response.data.total_doctor_fees)
+
         } else {
           // Handle the case where the response data is empty or undefined
           console.error("API response data is empty or undefined.");
@@ -44,9 +53,40 @@ function DoctorDashboard() {
     <div className="app" style={{ minHeight: "120vh" }}>
       <DoctorSidebar />
 
-      <Container maxWidth="xl" style={{ marginTop: "0px" }}>
+      <Container maxWidth="xl" style={{ marginTop: "20px" }}>
         {months.length > 0 && income.length > 0 ? (
           <>
+          <Grid container spacing={2}>
+            <Grid item xs={5} md={5}>
+             
+              <Card sx={{ minWidth: 275 }}>
+      <CardContent sx={{textAlign:'center'}}>
+        <h3>Total Appointments</h3>
+        
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <strong>{appointmentCount}</strong>
+        </Typography>
+        
+      </CardContent>
+      
+    </Card>
+            
+            </Grid>
+            <Grid item xs={5} md={5}>
+            <Card sx={{ minWidth: 275 }}>
+      <CardContent sx={{textAlign:'center'}}>
+        <h3> Total Revenue</h3>
+        
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+       <strong> ₹{totalDoctorFees}</strong>
+        </Typography>
+        
+      </CardContent>
+     
+    </Card>
+            </Grid>
+          </Grid>
+   
             <h2 style={{ color: "#0d9eb5" }}> Monthly Income</h2>
             <div style={{ marginBottom: "30px" }}>
               <BarChart

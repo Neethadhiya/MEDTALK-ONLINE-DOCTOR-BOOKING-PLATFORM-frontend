@@ -79,7 +79,7 @@ function Completion() {
         aria-describedby="alert-dialog-description"
         style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }} // Optional: Add a semi-transparent background to the dialog
       >
-        <DialogTitle id="alert-dialog-title">{"Thank You!"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Payment successful!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description" style={{color:'black'}}>
             Your payment has been processed successfully. Check your profile for appointment details.

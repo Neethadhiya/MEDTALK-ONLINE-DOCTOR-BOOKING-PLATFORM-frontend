@@ -337,20 +337,20 @@ function PatientAppointmentDetails() {
                               width: "230px",
                             }}
                           >
-                            <Typography
+                            {/* <Typography
                               sx={{ color: "black", fontSize: "14px" }}
                             >
                               <strong>Payment id</strong>
-                            </Typography>
+                            </Typography> */}
                           </div>
-                          <div>
+                          {/* <div>
                             <Typography
                               component="div"
                               sx={{ fontSize: "14px" }}
                             >
                               {appointment.payment.stripe_id}
                             </Typography>
-                          </div>
+                          </div> */}
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center" }}>

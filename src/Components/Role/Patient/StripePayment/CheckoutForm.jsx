@@ -41,7 +41,7 @@ export default function CheckoutForm() {
 
   return (
     <div>
-      <Grid container  style={{border:'solid #0d9eb5'}}>
+      <Grid container >
         <Grid item xs={12} sm={6} md={6}>
           <img
             src="https://res.cloudinary.com/da4bmqkkz/image/upload/v1696656624/65Z_2201.w012.n001.25B.p12.25_krsp6h.jpg"

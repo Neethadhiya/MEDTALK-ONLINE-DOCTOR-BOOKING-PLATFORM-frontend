@@ -6,6 +6,7 @@ import VideoCall from "../VideoCall/VideoCall";
 import PatientPrescription from "../PatientHeader/ViewPrescription";
 import PatientAppointmentDetails from "../../Patient/PatientAppointmentDetails";
 import ViewPatientProfile from "../ViewPatientProfile";
+import Wallet from "../Wallet";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,6 +76,10 @@ export default function PatientProfile() {
               <MenuItem onClick={() => handleChange(null, 1)}>
                 Appointment Details
               </MenuItem>
+
+              <MenuItem onClick={() => handleChange(null, 2)}>
+                Wallet
+              </MenuItem>
             </Menu>
           </>
         ) : (
@@ -87,6 +92,8 @@ export default function PatientProfile() {
           >
             <Tab label="View Profile" {...a11yProps(0)} />
             <Tab label="Appointment Details" {...a11yProps(1)} />
+            <Tab label="Wallet" {...a11yProps(2)} />
+
           </Tabs>
         )}
       </Box>
@@ -96,6 +103,10 @@ export default function PatientProfile() {
 
       <CustomTabPanel value={value} index={1}>
         <PatientAppointmentDetails />
+      </CustomTabPanel>
+
+      <CustomTabPanel value={value} index={2}>
+        <Wallet />
       </CustomTabPanel>
     </Box>
   );

@@ -346,6 +346,12 @@ function Index() {
                               >
                                 {doctor.experience} years experience overall
                               </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                               Video consultation fees -₹ {doctor.online_fees}
+                              </Typography>
 
                               <Typography
                                 variant="body2"

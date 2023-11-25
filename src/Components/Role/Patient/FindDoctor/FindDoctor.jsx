@@ -199,7 +199,7 @@ function FindDoctor() {
                             Chat consultation fees - {doctor.chat_fees}
                           </Typography> */}
                           <Typography variant="body2" color="text.secondary">
-                            Video consultation fees -{doctor.online_fees}
+                            Video consultation fees -₹ {doctor.online_fees}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
                             {doctor.qualification}

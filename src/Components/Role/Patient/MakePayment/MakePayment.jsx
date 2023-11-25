@@ -11,6 +11,12 @@ import CustomButton from '../../../Helpers/CustomButton';
 import Slide from '@mui/material/Slide';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LinearColor from '../../../Loader/CircleLoader';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { useNavigate } from 'react-router-dom';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -19,8 +25,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function MakePayment({appointmentId}) {
   const defaultTheme = createTheme();
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate()
   const [appointmentData,setAppointmentData] = useState(null)
+
+  
     const fetchData = () => {
       setLoading(true);
 
@@ -33,6 +41,7 @@ function MakePayment({appointmentId}) {
 
               } else {
                 setAppointmentData(response.data.appointment_data)
+               
                 setLoading(false);
 
               }
@@ -50,7 +59,44 @@ function MakePayment({appointmentId}) {
       useEffect(() => {
         fetchData();
       }, [appointmentId]);
+      const [selectedValue, setSelectedValue] = useState('stripe'); // Default value
 
+  const handleRadioChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log('Selected value:', selectedValue);
+  
+    if (selectedValue === 'stripe') {
+      navigate(`/patient/stripe_payment/${appointmentId}`);
+      console.log(appointmentId,'appointmentData.id')
+    } else {
+      const payload = { appointmentId: appointmentId };
+  
+      try {
+        const response = await patientAxiosInstance.post(`wallet_payment/${appointmentId}/`);
+
+        // Handle the response here
+        if (response.status === 200) {
+          toast.success(response.data.message);
+          navigate('/patient');
+
+          console.log('Wallet payment successful:', response.data);
+        } else {
+          toast.error(response.data.message);
+
+          console.error('Error:', response.statusText);
+        }
+      } catch (error) {
+        toast.error(error.response.data.message);
+
+        console.error('Error:', error);
+      }
+    }
+  };
+  
   return (
     <ThemeProvider theme={defaultTheme}>
   {loading ? ( // Conditionally render loader if loading is true
@@ -69,10 +115,11 @@ function MakePayment({appointmentId}) {
    >   
 {appointmentData  ?(
      <Grid container spacing={2} style={{ justifyContent : 'center',marginTop:'30px'}}>
-      <h2 style={{color:'#0d9eb5'}}>Make Payment</h2>    <img 
+      <h2 style={{color:'#0d9eb5'}}>Make Payment</h2> 
+         <img 
              src='https://res.cloudinary.com/da4bmqkkz/image/upload/v1696585540/ibook_pvx4cz.svg' />
          <Grid item xs={12} style={{marginTop:'-28px'}}>
-          <Card  style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',minHeight:'400px', border:'solid #0d9eb5' }}>
+          <Card  style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',minHeight:'400px' }}>
              <CardContent>
               <div sx={{minHeight:'300px'}}>
                <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -117,10 +164,30 @@ function MakePayment({appointmentId}) {
               </div>
                 </div>
                 <div style={{marginLeft:'80px'}}>
-                  <Link to={`/patient/stripe_payment/${appointmentData.id}`}>
-                    <CustomButton>Make Payment</CustomButton>
-                  </Link>
-                </div>
+                <FormLabel id="demo-radio-buttons-group-label">
+                <h3 style={{color:'#0d9eb5'}}>Choose Payment Type</h3>
+                </FormLabel>
+                <form onSubmit={handleFormSubmit}>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="stripe"
+          name="radio-buttons-group"
+          value={selectedValue}
+          onChange={handleRadioChange}
+        >
+          <FormControlLabel value="wallet" control={<Radio />} label="Wallet Payment" />
+          <FormControlLabel value="stripe" control={<Radio />} label="Stripe Payment" />
+        </RadioGroup>
+
+        <div style={{ marginLeft: '80px' }}>
+          <CustomButton type="submit">Make Payment</CustomButton>
+          {/* Use Link for navigation */}
+          {/* <Link to={`/patient/stripe_payment/${appointmentData.id}`}>
+            <CustomButton>Make Payment</CustomButton>
+          </Link> */}
+        </div>
+      </form>
+      </div>
              </CardContent>
            
            </Card>

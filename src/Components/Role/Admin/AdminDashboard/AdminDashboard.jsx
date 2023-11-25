@@ -39,6 +39,7 @@ function AdminDashboard() {
   const defaultTheme = createTheme();
   const [months, setMonthsData] = useState([]);
   const [income, setIncomeData] = useState([]);
+  const [appointmentCount,setAppointmentCount] = useState('')
   const fetchData = () => {
     adminAxiosInstance
       .get(`get_admin_chart/`)
@@ -47,6 +48,7 @@ function AdminDashboard() {
         if (response.data) {
           setMonthsData(response.data.months || []);
           setIncomeData(response.data.admin_fees || []);
+          setAppointmentCount(response.data.appointment_count)
         } else {
           // Handle the case where the response data is empty or undefined
           console.error("API response data is empty or undefined.");
@@ -103,6 +105,18 @@ function AdminDashboard() {
         </Menu>
       </Sidebar>
       <Container maxWidth="xl" style={{ marginTop: "0px" }}>
+      <Grid container spacing={2}>
+            <Grid item xs={5} md={5}>
+              <Card sx={{ minWidth: 275 }}>
+              <CardContent sx={{textAlign:'center'}}>
+                <h3>Total Appointments</h3>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <strong>{appointmentCount}</strong>
+                </Typography>
+              </CardContent>
+            </Card>
+            </Grid>
+          </Grid>
         <h2 style={{ color: "#0d9eb5" }}> Monthly Income</h2>
         <div style={{ marginBottom: "30px" }}>
           {months.length > 0 && income.length > 0 && (

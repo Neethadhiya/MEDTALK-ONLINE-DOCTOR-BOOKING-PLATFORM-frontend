@@ -276,7 +276,7 @@ const oneHourAhead = new Date(now.getTime() + 60 * 60 * 1000);
                 flexDirection: "column",
                 alignItems: "center",
                 minHeight: "400px",
-                border: "solid #0d9eb5",
+               
               }}
             >
               <CardContent>
