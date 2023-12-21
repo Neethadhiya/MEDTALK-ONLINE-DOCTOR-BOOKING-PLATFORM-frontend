@@ -82,6 +82,7 @@ function MakePayment({appointmentId}) {
         if (response.status === 200) {
           toast.success(response.data.message);
           navigate('/patient');
+          handleOpen();
 
           console.log('Wallet payment successful:', response.data);
         } else {
